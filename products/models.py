@@ -7,12 +7,12 @@ class Product(models.Model):
 
     # List of product categories, allows users to follow categories
     product_categories = [
-        ('Accessories', 'Accessories'),
-        ('Bikes', 'Bikes'),
-        ('Components', 'Components'),
-        ('Clothing', 'Clothing'),
-        ('Health and Fitness', 'Health and Fitness'),
-        ('Tools and Workshop', 'Tools and Workshop'),
+        ('accessories', 'Accessories'),
+        ('bikes', 'Bikes'),
+        ('components', 'Components'),
+        ('clothing', 'Clothing'),
+        ('health and fitness', 'Health and Fitness'),
+        ('tools and workshop', 'Tools and Workshop'),
     ]
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
