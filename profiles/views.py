@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response 
 from .models import Profile
 from .serializers import ProfileSerializer
+from kitrate_api.permissions import IsOwnerOrReadOnly
 
 
 class ProfileList(APIView):
@@ -23,10 +24,14 @@ class ProfileDetail(APIView):
     # Setting the serializer class automatically creates a form for the "put" method
     serializer_class = ProfileSerializer
 
+    # Setting the permission class to allow only data owners to update their data
+    permission_classes = [IsOwnerOrReadOnly]
+
     # Method to see if specific profile is avaialble, by primary key
     def get_object(self, pk):
         try:
             profile = Profile.objects.get(pk=pk)
+            self.check_object_permissions(self.request, profile)
             return profile
         except Profile.DoesNotExist:
             raise Http404
