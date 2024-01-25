@@ -27,6 +27,6 @@ def create_profile(sender, instance, created, **kwargs):
         Profile.objects.create(owner=instance)
 
 
-# uses django signals to create a user profile, calling create_profile 
-# function and expecting signal from User model
+# uses django signals to create a user profile, calling 
+# create_profile function and expecting signal from User model
 post_save.connect(create_profile, sender=User)
