@@ -7,6 +7,8 @@ from .serializers import ProfileSerializer
 from kitrate_api.permissions import IsOwnerOrReadOnly
 
 
+# Taken from Code Institute lesson material on Django REST Framework
+
 class ProfileList(APIView):
     # View to list all profiles
     # Profile creation is handled by Django signals - profiles > models.py
@@ -14,7 +16,7 @@ class ProfileList(APIView):
     # Method to get profiles list and serialize to JSON
     def get(self, request):
         profiles = Profile.objects.all()
-        serializer = ProfileSerializer(profiles, many=True)
+        serializer = ProfileSerializer(profiles, many=True, context={'request': request})
         return Response(serializer.data)
 
 
@@ -39,13 +41,13 @@ class ProfileDetail(APIView):
     # Method to get the specific profile using get_ojbect method and serialize to JSON
     def get(self, request, pk):
         profile = self.get_object(pk)
-        serializer = ProfileSerializer(profile)
+        serializer = ProfileSerializer(profile, context={'request': request})
         return Response(serializer.data)
 
     # Method to retrieve a specific profile, update details through serializer and save
     def put(self, request, pk):
         profile = self.get_object(pk)
-        serializer = ProfileSerializer(profile, data=request.data)
+        serializer = ProfileSerializer(profile, data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
