@@ -7,7 +7,7 @@ from .serializers import ProfileSerializer
 from kitrate_api.permissions import IsOwnerOrReadOnly
 
 
-# Taken from Code Institute lesson material on Django REST Framework
+# Based on Code Institute lesson material on Django REST Framework
 
 class ProfileList(APIView):
     # View to list all profiles
