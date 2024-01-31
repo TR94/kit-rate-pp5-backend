@@ -38,7 +38,7 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = [
-            # note: 'id' is added automatically in the Profile model and must be included in the serializer
+            # note: 'id' is added automatically in the Product model and must be included in the serializer
             'id', 'owner', 'created_at', 'updated_at', 'title', 'description',
             'image','category', 'is_owner', 'profile_id', 'profile_image',
         ]
