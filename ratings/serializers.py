@@ -18,5 +18,5 @@ class RatingSerializer(serializers.ModelSerializer):
             return super().create(validated_data)
         except IntegrityError:
             raise serializers.ValidationError({
-                'detail':'possible duplicate'
+                'detail':'cannot add two ratings to the same product'
             })

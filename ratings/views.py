@@ -5,7 +5,7 @@ from ratings.serializers import RatingSerializer
 
 
 class RatingList(generics.ListCreateAPIView):
-    # Django generics takes care of GET method
+    # Django generics takes care of GET and PUT method
     serializer_class = RatingSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Ratings.objects.all()
@@ -14,8 +14,8 @@ class RatingList(generics.ListCreateAPIView):
         # this associates a user with the like
         serializer.save(owner=self.request.user)
 
-class RatingDetail(generics.RetrieveDestroyAPIView):
-    # Django generics takes care of GET and DELETE methods
+class RatingDetail(generics.RetrieveUpdateDestroyAPIView):
+    # Django generics takes care of GET, PUT and DELETE methods
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = RatingSerializer
     queryset = Ratings.objects.all()
