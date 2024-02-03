@@ -8,12 +8,11 @@ from products.models import Product
 class Subscribe(models.Model):
    
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ForeignKey(Product.category, on_delete=models.CASCADE, related_name='subscribed')
+    # category = models.ForeignKey(Product.category, on_delete=models.CASCADE, related_name='subscribed')
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['-created_at']
-        unique_together = ['owner', 'category']
 
     def __str__(self):
         return f'{self.owner} {self.subscribed}'
