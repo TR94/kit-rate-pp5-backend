@@ -10,12 +10,7 @@ class CategoryList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Category.objects.all()
 
-    def perform_create(self, serializer):
-        # this associates a user with the follow
-        serializer.save(owner=self.request.user)
-
 class CategoryDetail(generics.RetrieveDestroyAPIView):
-    # Django generics takes care of GET and DELETE methods
-    permission_classes = [IsOwnerOrReadOnly]
+# Django generics takes care of GET and DELETE methods
     serializer_class = CategorySerializer
     queryset = Category.objects.all()

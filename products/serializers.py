@@ -1,10 +1,13 @@
 from rest_framework import serializers
 from .models import Product
+from categories.models import Category
 
 # Taken from Code Institute lesson material on Django REST Framework
 
 class ProductSerializer(serializers.ModelSerializer):
+
     owner = serializers.ReadOnlyField(source='owner.username')
+    category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
 
     # Add extra field for conditional rendering, such as edit/delete buttons which are user specific
     is_owner = serializers.SerializerMethodField()
@@ -12,6 +15,7 @@ class ProductSerializer(serializers.ModelSerializer):
     # Add extra fields for profile related data
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
+
 
     # built in rest framework validation uses "validate_[field name]"
     def validate_image(self, value):
@@ -38,7 +42,6 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = [
-            # note: 'id' is added automatically in the Product model and must be included in the serializer
             'id', 'owner', 'created_at', 'updated_at', 'title', 'description',
-            'image','category', 'is_owner', 'profile_id', 'profile_image',
+            'image', 'category', 'is_owner', 'profile_id', 'profile_image',
         ]

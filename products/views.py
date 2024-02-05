@@ -20,7 +20,7 @@ class ProductList(APIView):
 
     # Method to get products list and serialize to JSON
     def get(self, request):
-        products = Product.objects.all()
+        products = Product.objects.all().select_related('category')
         serializer = ProductSerializer(products, many=True, context={'request': request})
         return Response(serializer.data)
 
