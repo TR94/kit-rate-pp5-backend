@@ -18,5 +18,5 @@ class SubscribeSerializer(serializers.ModelSerializer):
             return super().create(validated_data)
         except IntegrityError:
             raise serializers.ValidationError({
-                'detail':'cannot subscribe to the same product twice'
+                'detail':'cannot subscribe to the same category twice'
             })
