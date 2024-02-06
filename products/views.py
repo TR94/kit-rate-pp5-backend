@@ -1,3 +1,4 @@
+from django.db.models import Count, Avg
 from rest_framework import generics, permissions
 from .models import Product
 from .serializers import ProductSerializer
@@ -16,7 +17,11 @@ class ProductList(generics.ListCreateAPIView):
     # Permissions to only allow logged in users to create a product
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    queryset = Product.objects.all()
+    queryset = Product.objects.annotate(
+        favourited_count=Count('favourites', distinct=True),
+        review_count=Count('review', distinct=True),
+        average_rating=Avg('owner__ratings__rating', distinct=True),
+    )
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)

@@ -1,8 +1,8 @@
+from django.db.models import Count, Avg
 from rest_framework import generics
+from kitrate_api.permissions import IsOwnerOrReadOnly
 from .models import Profile
 from .serializers import ProfileSerializer
-from kitrate_api.permissions import IsOwnerOrReadOnly
-
 
 # Based on Code Institute lesson material on Django REST Framework
 
@@ -14,7 +14,12 @@ class ProfileList(generics.ListAPIView):
     # Setting the serializer class automatically creates a form for the "put" method
     serializer_class = ProfileSerializer
 
-    queryset = Profile.objects.all()
+    # Adding extra fields to the queryset for statistics
+    queryset = Profile.objects.annotate(
+        review_count=Count('owner__review', distinct=True),
+        average_rating=Avg('owner__ratings__rating', distinct=True),
+        subscriptions_count=Count('owner__subscriber', distinct=True),
+    ).order_by('-created_at')
 
 class ProfileDetail(generics.RetrieveUpdateAPIView):
     # View to see the details of a specific profile by ID

@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Product
 from categories.models import Category
+from favourites.models import Favourites
 
 # Taken from Code Institute lesson material on Django REST Framework
 
@@ -15,6 +16,15 @@ class ProductSerializer(serializers.ModelSerializer):
     # Add extra fields for profile related data
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
+
+    # Add extra field to track favourite products
+    favourite_id = serializers.SerializerMethodField()
+
+    # Add extra fields from model queryset for page statistics
+    review_count = serializers.ReadOnlyField()
+    favourited_count = serializers.ReadOnlyField()
+    average_rating = serializers.ReadOnlyField()
+
 
 
     # built in rest framework validation uses "validate_[field name]"
@@ -39,9 +49,20 @@ class ProductSerializer(serializers.ModelSerializer):
         request = self.context['request']
         return request.user == obj.owner
 
+    # Method to check if the user have favourited a specific product or not
+    def get_favourite_id(self, obj):
+        user = self.context['request'].user
+        if user.is_authenticated:
+            favourited = Favourites.objects.filter(
+                owner=user, product=obj
+            ).first()
+            return favourited.id if favourited else None
+        return None
+
+
     class Meta:
         model = Product
         fields = [
-            'id', 'owner', 'created_at', 'updated_at', 'title', 'description',
-            'image', 'category', 'is_owner', 'profile_id', 'profile_image',
+            'id', 'owner', 'created_at', 'updated_at', 'title', 'description', 'image', 'category', 'is_owner',
+            'profile_id', 'profile_image', 'favourite_id','review_count', 'favourited_count', 'average_rating',
         ]
