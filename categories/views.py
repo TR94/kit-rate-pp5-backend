@@ -13,4 +13,5 @@ class CategoryList(generics.ListCreateAPIView):
 class CategoryDetail(generics.RetrieveDestroyAPIView):
 # Django generics takes care of GET and DELETE methods
     serializer_class = CategorySerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Category.objects.all()
