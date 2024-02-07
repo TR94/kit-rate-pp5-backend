@@ -1,5 +1,5 @@
 from django.db.models import Count, Avg
-from rest_framework import generics
+from rest_framework import generics, filters
 from kitrate_api.permissions import IsOwnerOrReadOnly
 from .models import Profile
 from .serializers import ProfileSerializer
@@ -21,6 +21,12 @@ class ProfileList(generics.ListAPIView):
         subscriptions_count=Count('owner__subscriber', distinct=True),
     ).order_by('-created_at')
 
+    filter_backends = [filters.OrderingFilter]
+
+    ordering_fields = [
+        'review_count', 'average_rating', 'subscriptions_count'
+    ]
+
 class ProfileDetail(generics.RetrieveUpdateAPIView):
     # View to see the details of a specific profile by ID
     # Django generics takes care of GET and PUT methods
@@ -36,6 +42,12 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
         average_rating=Avg('owner__ratings__rating', distinct=True),
         subscriptions_count=Count('owner__subscriber', distinct=True),
     ).order_by('-created_at')
+
+    filter_backends = [filters.OrderingFilter]
+
+    ordering_fields = [
+        'review_count', 'average_rating', 'subscriptions_count'
+    ]
 
 
 

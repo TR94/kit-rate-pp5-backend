@@ -1,5 +1,5 @@
 from django.db.models import Count, Avg
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, filters
 from .models import Product
 from .serializers import ProductSerializer
 from kitrate_api.permissions import IsOwnerOrReadOnly
@@ -23,6 +23,12 @@ class ProductList(generics.ListCreateAPIView):
         average_rating=Avg('ratings__rating', distinct=True),
     )
 
+    filter_backends = [filters.OrderingFilter]
+
+    ordering_fields = [
+        'favourited_count', 'average_rating', 'review_count'
+    ]
+
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
@@ -41,6 +47,12 @@ class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
         review_count=Count('review', distinct=True),
         average_rating=Avg('ratings__rating', distinct=True),
     )
+
+    filter_backends = [filters.OrderingFilter]
+
+    ordering_fields = [
+        'favourited_count', 'average_rating', 'review_count'
+    ]
 
 
 
