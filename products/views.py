@@ -1,5 +1,6 @@
 from django.db.models import Count, Avg
 from rest_framework import generics, permissions, filters
+from django_filters.rest_framework import DjangoFilterBackend
 from .models import Product
 from .serializers import ProductSerializer
 from kitrate_api.permissions import IsOwnerOrReadOnly
@@ -23,7 +24,22 @@ class ProductList(generics.ListCreateAPIView):
         average_rating=Avg('ratings__rating', distinct=True),
     )
 
-    filter_backends = [filters.OrderingFilter]
+    filter_backends = [
+        filters.OrderingFilter, 
+        filters.SearchFilter,
+        DjangoFilterBackend,
+    ]
+
+    filterset_fields = [
+        'owner__username',
+        'category',
+        'ratings__rating',
+    ]
+
+    search_fields = [
+        'owner__username',
+        'title',
+    ]
 
     ordering_fields = [
         'favourited_count', 'average_rating', 'review_count'
@@ -47,12 +63,5 @@ class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
         review_count=Count('review', distinct=True),
         average_rating=Avg('ratings__rating', distinct=True),
     )
-
-    filter_backends = [filters.OrderingFilter]
-
-    ordering_fields = [
-        'favourited_count', 'average_rating', 'review_count'
-    ]
-
 
 

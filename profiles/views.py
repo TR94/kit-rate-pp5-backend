@@ -43,11 +43,5 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
         subscriptions_count=Count('owner__subscriber', distinct=True),
     ).order_by('-created_at')
 
-    filter_backends = [filters.OrderingFilter]
-
-    ordering_fields = [
-        'review_count', 'average_rating', 'subscriptions_count'
-    ]
-
 
 
