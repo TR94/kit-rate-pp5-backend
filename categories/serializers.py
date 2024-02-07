@@ -8,6 +8,9 @@ class CategorySerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
     subscribe_id = serializers.SerializerMethodField()
 
+    subscriptions_count = serializers.ReadOnlyField()
+    product_count = serializers.ReadOnlyField()
+
     def get_is_owner(self, obj):
         request = self.context['request']
         return request.user == obj.owner
@@ -24,4 +27,5 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ['id', 'category', 'created_at', 'owner', 'is_owner', 'subscribe_id']
+        fields = ['id', 'category', 'created_at', 'owner', 'is_owner',
+                'subscribe_id', 'subscriptions_count', 'product_count',]

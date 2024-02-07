@@ -31,7 +31,11 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
     # Setting the permission class to allow only data owners to update their data
     permission_classes = [IsOwnerOrReadOnly]
 
-    queryset = Profile.objects.all()
+    queryset = Profile.objects.annotate(
+        review_count=Count('owner__review', distinct=True),
+        average_rating=Avg('owner__ratings__rating', distinct=True),
+        subscriptions_count=Count('owner__subscriber', distinct=True),
+    ).order_by('-created_at')
 
 
 

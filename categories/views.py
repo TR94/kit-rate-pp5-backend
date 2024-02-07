@@ -1,3 +1,4 @@
+from django.db.models import Count
 from rest_framework import generics, permissions
 from kitrate_api.permissions import IsOwnerOrReadOnly
 from .models import Category
@@ -8,10 +9,16 @@ class CategoryList(generics.ListCreateAPIView):
 # Django generics takes care of GET and PUT methods
     serializer_class = CategorySerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    queryset = Category.objects.all()
+    queryset = Category.objects.annotate(
+        subscriptions_count=Count('subscribed', distinct=True),
+        product_count=Count('product', distinct=True),
+    )
 
 class CategoryDetail(generics.RetrieveDestroyAPIView):
 # Django generics takes care of GET and DELETE methods
     serializer_class = CategorySerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    queryset = Category.objects.all()
+    queryset = Category.objects.annotate(
+        subscriptions_count=Count('subscribed', distinct=True),
+        product_count=Count('product', distinct=True),
+    )

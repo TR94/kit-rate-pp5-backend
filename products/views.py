@@ -20,7 +20,7 @@ class ProductList(generics.ListCreateAPIView):
     queryset = Product.objects.annotate(
         favourited_count=Count('favourites', distinct=True),
         review_count=Count('review', distinct=True),
-        average_rating=Avg('owner__ratings__rating', distinct=True),
+        average_rating=Avg('ratings__rating', distinct=True),
     )
 
     def perform_create(self, serializer):
@@ -36,7 +36,11 @@ class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     # Setting the permission class to allow only data owners to update their data
     permission_classes = [IsOwnerOrReadOnly]
 
-    queryset = Product.objects.all()
+    queryset = Product.objects.annotate(
+        favourited_count=Count('favourites', distinct=True),
+        review_count=Count('review', distinct=True),
+        average_rating=Avg('ratings__rating', distinct=True),
+    )
 
 
 
