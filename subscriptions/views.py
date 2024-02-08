@@ -10,6 +10,7 @@ class SubscribeList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Subscribe.objects.all()
 
+
     def perform_create(self, serializer):
         # this associates a user with the follow
         serializer.save(owner=self.request.user)

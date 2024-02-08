@@ -3,7 +3,6 @@ from .models import Product
 from categories.models import Category
 from favourites.models import Favourites
 
-# Taken from Code Institute lesson material on Django REST Framework
 
 class ProductSerializer(serializers.ModelSerializer):
 
@@ -24,8 +23,6 @@ class ProductSerializer(serializers.ModelSerializer):
     review_count = serializers.ReadOnlyField()
     favourited_count = serializers.ReadOnlyField()
     average_rating = serializers.ReadOnlyField()
-
-
 
     # built in rest framework validation uses "validate_[field name]"
     def validate_image(self, value):
