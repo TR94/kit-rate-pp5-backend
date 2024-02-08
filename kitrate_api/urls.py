@@ -28,4 +28,5 @@ urlpatterns = [
     path('', include('favourites.urls')),
     path('', include('subscriptions.urls')),
     path('', include('categories.urls')),
+    path('', include('notifications.urls')),
 ]
