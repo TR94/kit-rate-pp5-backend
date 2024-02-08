@@ -1,5 +1,6 @@
 from rest_framework import serializers 
 from .models import Notification
+from products.serializers import ProductSerializer
 
 
 class NotificationSerializer(serializers.ModelSerializer):

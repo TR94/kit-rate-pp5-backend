@@ -8,7 +8,7 @@ class Notification(models.Model):
     target = models.ForeignKey(User, on_delete=models.CASCADE, related_name="target")
     content = models.TextField(blank=True) 
     created_at = models.DateTimeField(auto_now_add=True)
-    product_title = models.OneToOneField(Product, on_delete=models.CASCADE, related_name="product_title")
+    product_title = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['-created_at']
