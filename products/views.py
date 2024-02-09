@@ -21,7 +21,7 @@ class ProductList(generics.ListCreateAPIView):
     queryset = Product.objects.annotate(
         favourited_count=Count('favourites', distinct=True),
         review_count=Count('review', distinct=True),
-        average_rating=Avg('ratings__rating', distinct=True),
+        average_rating=Avg('review__rating', distinct=True),
     )
 
     filter_backends = [
@@ -33,7 +33,7 @@ class ProductList(generics.ListCreateAPIView):
     filterset_fields = [
         'owner__username',
         'category',
-        'ratings__rating',
+        'review__rating',
     ]
 
     search_fields = [
@@ -61,7 +61,7 @@ class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.annotate(
         favourited_count=Count('favourites', distinct=True),
         review_count=Count('review', distinct=True),
-        average_rating=Avg('ratings__rating', distinct=True),
+        average_rating=Avg('review__rating', distinct=True),
     )
 
 

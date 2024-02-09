@@ -9,10 +9,7 @@ class ReviewList(generics.ListCreateAPIView):
 # Django generics to create the GET and PUT methods
     serializer_class = ReviewSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    queryset = Review.objects.annotate(
-        # FIX THIS ISSUE WITH PULLING RATING THROUGH TO REVIEW LIST
-        rating=Count('product__ratings__rating', distinct=True),
-    )
+    queryset = Review.objects.all()
 
     filter_backends = [DjangoFilterBackend]
     # filterset_fields = ['product__ratings__rating']

@@ -80,7 +80,6 @@ INSTALLED_APPS = [
     'profiles',
     'products',
     'reviews',
-    'ratings',
     'favourites',
     'subscriptions',
     'categories',

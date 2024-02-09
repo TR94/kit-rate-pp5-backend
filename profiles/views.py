@@ -17,7 +17,7 @@ class ProfileList(generics.ListAPIView):
     # Adding extra fields to the queryset for statistics
     queryset = Profile.objects.annotate(
         review_count=Count('owner__review', distinct=True),
-        average_rating=Avg('owner__ratings__rating', distinct=True),
+        average_rating=Avg('owner__review__rating', distinct=True),
         subscriptions_count=Count('owner__subscriber', distinct=True),
     ).order_by('-created_at')
 
@@ -39,7 +39,7 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
 
     queryset = Profile.objects.annotate(
         review_count=Count('owner__review', distinct=True),
-        average_rating=Avg('owner__ratings__rating', distinct=True),
+        average_rating=Avg('owner__review__rating', distinct=True),
         subscriptions_count=Count('owner__subscriber', distinct=True),
     ).order_by('-created_at')
 

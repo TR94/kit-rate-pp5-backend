@@ -11,9 +11,6 @@ class ReviewSerializer(serializers.ModelSerializer):
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
 
-    # Add extra field as read ony from queryset annotation 
-    rating = serializers.ReadOnlyField()
-
     # Method to check user is the same as the object's owner
     def get_is_owner(self, obj):
         request = self.context['request']
@@ -24,7 +21,7 @@ class ReviewSerializer(serializers.ModelSerializer):
         fields = [
             # note: 'id' is added automatically in the Review model and must be included in the serializer
             'id', 'owner','product', 'created_at', 'updated_at', 
-            'content', 'is_owner', 'profile_id', 'profile_image', 'rating',
+            'content', 'rating', 'is_owner', 'profile_id', 'profile_image',
         ]
 
 # Serializer to ensure the review is always associated with the same product
