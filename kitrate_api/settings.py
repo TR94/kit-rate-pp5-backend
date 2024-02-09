@@ -40,7 +40,7 @@ REST_FRAMEWORK = {
     'DATETIME_FORMAT': '%d %b %Y',
 }
 
-if 'DEV' not in os.environ:
+if 'DEV_RENDER' not in os.environ:
     REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = [
         'rest_framework.renderers.JSONRenderer',
     ]
@@ -62,9 +62,9 @@ REST_AUTH_SERIALIZERS = {
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DEV' in os.environ
+DEBUG = 'DEV_DEBUG' in os.environ
 
-ALLOWED_HOSTS = ['localhost', 'kitrate-pp5-backend-47910aa247ff.herokuapp.com']
+ALLOWED_HOSTS = ['localhost','8000-tr94-kitratepp5backen-mdh78buabuc.ws-eu108.gitpod.io', 'kitrate-pp5-backend-47910aa247ff.herokuapp.com']
 
 
 # Application definition
@@ -146,7 +146,7 @@ WSGI_APPLICATION = 'kitrate_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if 'DEV' in os.environ:
+if 'DEV_DB' in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',

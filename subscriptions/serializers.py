@@ -11,7 +11,7 @@ class SubscribeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subscribe
         fields = [
-            'id','owner','created_at','category_detail',
+            'id','owner','created_at','category','category_detail',
         ]
 
     # to handle a user subscribing to the same category twice 
