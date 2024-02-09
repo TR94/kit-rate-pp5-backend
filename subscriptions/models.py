@@ -17,4 +17,4 @@ class Subscribe(models.Model):
         unique_together = ['owner', 'category']
 
     def __str__(self):
-        return f'{self.owner} {self.subscribed}'
+        return f'{self.owner} {self.category}'
