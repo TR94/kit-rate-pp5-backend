@@ -16,4 +16,4 @@ class Favourites(models.Model):
         unique_together = ['owner', 'product']
 
     def __str__(self):
-        return f'{self.owner} {self.product}'
+        return f'{self.owner}: {self.product}'
