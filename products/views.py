@@ -35,7 +35,7 @@ class ProductList(generics.ListCreateAPIView):
         'category',
         'review__rating',
         'category__subscribed__owner',
-        'product__owner',
+        'favourites__owner',
     ]
 
     search_fields = [
