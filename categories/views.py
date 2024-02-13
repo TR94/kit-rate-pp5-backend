@@ -23,7 +23,7 @@ class CategoryList(generics.ListCreateAPIView):
 
     filterset_fields = [
         'category',
-        'review__rating',
+        'product__review__rating',
     ]
 
     search_fields = [

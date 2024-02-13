@@ -33,7 +33,7 @@ class ProductList(generics.ListCreateAPIView):
     filterset_fields = [
         'owner__username',
         'category',
-        'product__review__rating',
+        'review__rating',
         'category__subscribed__owner',
         'favourites__owner',
         'favourites__created_at',
