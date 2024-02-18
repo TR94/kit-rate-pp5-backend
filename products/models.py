@@ -17,7 +17,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     
     class Meta:
-        ordering = ['-id']
+        ordering = ['-created_at']
 
     def __str__(self):
         return f'{self.title}'
