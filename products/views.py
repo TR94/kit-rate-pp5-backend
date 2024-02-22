@@ -22,7 +22,6 @@ class ProductList(generics.ListCreateAPIView):
         favourited_count=Count('favourites', distinct=True),
         review_count=Count('review', distinct=True),
         average_rating=Avg('review__rating', distinct=True),
-        category_name=
     )
 
     filter_backends = [
