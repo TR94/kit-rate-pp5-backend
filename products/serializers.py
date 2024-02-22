@@ -2,12 +2,14 @@ from rest_framework import serializers
 from .models import Product
 from categories.models import Category
 from favourites.models import Favourites
-
+from categoriges.serializers import CategorySerializer
 
 class ProductSerializer(serializers.ModelSerializer):
 
     owner = serializers.ReadOnlyField(source='owner.username')
     category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
+    category_detail = CategorySerializer(source='category', read_only=True)
+    
 
     # Add extra field for conditional rendering, such as edit/delete buttons which are user specific
     is_owner = serializers.SerializerMethodField()
