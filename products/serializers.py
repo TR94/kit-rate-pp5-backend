@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Product
 from categories.models import Category
 from favourites.models import Favourites
-from categoriges.serializers import CategorySerializer
+from categories.serializers import CategorySerializer
 
 class ProductSerializer(serializers.ModelSerializer):
 
