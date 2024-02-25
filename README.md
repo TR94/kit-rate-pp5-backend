@@ -240,9 +240,8 @@ This information has been created as variables in the settings.py file and refer
 
 
 # Features to add in the future
-The Notifications functionality has been created in the backend but hasn’t been tested in the front end as its part of the future work to be completed. As the notification functionality is developed in the front end there may be changes required to the back-end to achieve the desired behaviour.
-
-# Code standards and Practices
+* The Notifications functionality has been created in the backend but hasn’t been tested in the front end as its part of the future work to be completed. As the notification functionality is developed in the front end there may be changes required to the back-end to achieve the desired behaviour.
+* For first release there is no control on users adding products and therefore duplicates are inevitable. The site needs an admin approval control for new products being added which can have a number of checks to ensure it is suitable for publishing. 
 
 
 # Technologies Used
@@ -266,8 +265,10 @@ A variety of libraries have been used to enable functionality:
 
 ## External resources used:
 ### Git-Hub / Git-Pod:
+All project files are stored within a Git-hub repository. Git-pod is linked to Git-hub through a browser extension and is the coding platform.
 
 ### Heroku 
+With the pythonic nature of Django, Heroku is used to host the site as back-end application which can be interacted with.
 
 ### Cloudinary
 Cloud based storage for images and static files which remains stable to ensure links stay open indefinitely. 
@@ -277,7 +278,7 @@ Cloud based storage for images and static files which remains stable to ensure l
 ### Functionality testing:
 Thorough manual testing has been carried out to test the functionality of the site and ensure it is operating as expected. 
 
-<a href=“…” target="_blank">Link to testing document</a>
+[KitRate testing document](/static/readme_images/KitRate_API_testing.pdf)
 
 ### Validator Testing:
 #### CI Pep8 Python linter:
