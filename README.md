@@ -2,6 +2,17 @@
 # KitRate
 Kit Rate is a website for activity enthusiasts who want to research kit (products) before they buy. This site is building a community of active product testers who can provide the viewer an insight into a product with reviews and ratings which can help inform a buying decision. The initial release of this site is focused around Mountain Biking kit but it has been designed to be scalable to other sports and activities in the future. 
 
+## Links:
+<a href="https://github.com/users/TR94/projects/4" target="_blank">Link to the GitHub project for KitRate</a>
+
+<a href="https://github.com/TR94/kit-rate-pp5-frontend" target="_blank">Link to the Front End repository for KitRate</a>
+
+<a href="..." target="_blank">Link to the Front End deployed site for KitRate</a>
+
+<a href="https://github.com/TR94/kit-rate-pp5-backend" target="_blank">Link to the Back End repository for KitRate</a>
+
+<a href="https://kitrate-pp5-backend-47910aa247ff.herokuapp.com/" target="_blank">Link to the Back End deployed site for KitRate</a>
+
 # Development Planes
 In order to develop this site in a guided and efficient manner, the five development planes have been considered. These are focused on design lead thinking and allow the critical elements of the site to be developed before committing to code. 
 
