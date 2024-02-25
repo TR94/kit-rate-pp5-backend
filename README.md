@@ -1,3 +1,4 @@
+
 # KitRate
 Kit Rate is a website for activity enthusiasts who want to research kit (products) before they buy. This site is building a community of active product testers who can provide the viewer an insight into a product with reviews and ratings which can help inform a buying decision. The initial release of this site is focused around Mountain Biking kit but it has been designed to be scalable to other sports and activities in the future. 
 
@@ -182,7 +183,7 @@ Based on the strategy above and the agile management approach, the content requi
 # Structure
 For the backend database, a diagram helps to depict the data fields, their groupings (tables) and the relationships between them all. This diagram becomes a key reference whilst building the models and therefore agreement at this stage is key to a smooth development process. 
 
-![KitRate Database Diagram](/static/readme_imges/kitrate_db_diagram.png)
+![KitRate Database Diagram](/static/readme_images/kitrate_db_diagram.png)
 
 
 # Features
@@ -192,13 +193,32 @@ The admin panel is available using /admin in the URL. This gives access to the d
 ## Categories
 Categories are created by a super user in the admin panel, these are fixed and controlled by site administrators. The data held for each category is shown below:
 
-
+![KitRate categories](/static/readme_images/kitrate_categories.png)
 
 ## Favourites
+Favourites are created by a logged in user who wants to save a particular product of interest. Products are marked with how many users have favourited it and users can access their favourited products in the "favourites" page from the navigation bar. The data held for each favourited event is shown below:
+
+![KitRate favourites](/static/readme_images/kitrate_favourites.png)
+
 ## Notifications
+Notifications have not yet been released as a feature in the front end however the database has been set-up to handle them. It is intended that users will receive notifications when a favourited product receives a new review or a product is added to a subscribed cateogry. The data held for each notification is shown below:
+
+![KitRate notifications](/static/readme_images/kitrate_notifications.png)
+
 ## Products
+Products are created by a logged in user and tie together a lot of the database such as categories, reviews and profiles. The data held for each product is shown below:
+
+![KitRate products](/static/readme_images/kitrate_products.png)
+
 ## Reviews
+Reviews are left on products giving the user the chance to leave their thoughts and ratings as well as view other users reviews. The ratings are averaged out and displayed for each proucts. The data held for each review is shown below:
+
+![KitRate reviews](/static/readme_images/kitrate_reviews.png)
+
 ## Subscriptions
+Users can subscribe to categories of interest with the intention of staying up to date wth the latest products. The feed page will be populated with all the products that are in the subscribed categories for the user. The data held for each subscription is shown below:
+
+![KitRate subscriptions](/static/readme_images/kitrate_subscriptions.png)
 
 # Security
 Security is taken care of using an env.py file which is included in the gitignore file to ensure it is never committed publicly. Three key pieces of secret information are included in the env.py file:
