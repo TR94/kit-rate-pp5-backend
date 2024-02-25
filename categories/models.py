@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-# Category model based on the DRF walkthough project from Code Institute
 class Category(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.CharField(max_length=32)

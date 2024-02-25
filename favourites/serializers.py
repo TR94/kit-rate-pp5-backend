@@ -1,5 +1,6 @@
+from rest_framework import serializers
 from django.db import IntegrityError
-from rest_framework import serializers 
+
 from .models import Favourites
 
 
@@ -9,14 +10,14 @@ class FavouriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Favourites
         fields = [
-            'id','owner','created_at','product',
+            'id', 'owner', 'created_at', 'product'
         ]
 
-    # to handle a user favouriting the same product twice 
+    # to handle a user favouriting the same product twice
     def create(self, validated_data):
-        try: 
+        try:
             return super().create(validated_data)
         except IntegrityError:
             raise serializers.ValidationError({
-                'detail':'cannot favourite the same product twice'
+                'detail': 'cannot favourite the same product twice'
             })

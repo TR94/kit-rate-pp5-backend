@@ -1,13 +1,16 @@
 from django.db.models import Count
 from rest_framework import generics, permissions, filters
-from django_filters.rest_framework import DjangoFilterBackend
 from kitrate_api.permissions import IsOwnerOrReadOnly
+from django_filters.rest_framework import DjangoFilterBackend
+
 from .models import Category
 from .serializers import CategorySerializer
 
 
 class CategoryList(generics.ListCreateAPIView):
-# Django generics takes care of GET and PUT methods
+    # View to list all categories
+    # Django generics takes care of GET and PUT methods
+
     serializer_class = CategorySerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Category.objects.annotate(
@@ -16,7 +19,7 @@ class CategoryList(generics.ListCreateAPIView):
     )
 
     filter_backends = [
-        filters.OrderingFilter, 
+        filters.OrderingFilter,
         filters.SearchFilter,
         DjangoFilterBackend,
     ]
@@ -34,8 +37,11 @@ class CategoryList(generics.ListCreateAPIView):
         'subscriptions_count', 'product_count'
     ]
 
+
 class CategoryDetail(generics.RetrieveDestroyAPIView):
-# Django generics takes care of GET and DELETE methods
+    # View to see the details of a specific category by ID
+    # Django generics takes care of GET and DELETE methods
+
     serializer_class = CategorySerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Category.objects.annotate(

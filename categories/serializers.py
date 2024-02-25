@@ -1,4 +1,5 @@
-from rest_framework import serializers 
+from rest_framework import serializers
+
 from .models import Category
 from subscriptions.models import Subscribe
 
@@ -8,6 +9,7 @@ class CategorySerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
     subscribe_id = serializers.SerializerMethodField()
 
+    # Add extra fields from model queryset for page statistics
     subscriptions_count = serializers.ReadOnlyField()
     product_count = serializers.ReadOnlyField()
 
@@ -28,4 +30,4 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ['id', 'category', 'created_at', 'owner', 'is_owner',
-                'subscribe_id', 'subscriptions_count', 'product_count',]
+                'subscribe_id', 'subscriptions_count', 'product_count']

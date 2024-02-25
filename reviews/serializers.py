@@ -1,11 +1,11 @@
-from django.contrib.humanize.templatetags.humanize import naturaltime
 from rest_framework import serializers
+from django.contrib.humanize.templatetags.humanize import naturaltime
+
 from .models import Review
+
 
 class ReviewSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
-
-    # Add extra field for conditional rendering, such as edit/delete buttons which are user specific
     is_owner = serializers.SerializerMethodField()
 
     # Add extra fields for profile related data
@@ -31,10 +31,10 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = [
-            # note: 'id' is added automatically in the Review model and must be included in the serializer
-            'id', 'owner','product', 'created_at', 'updated_at', 
+            'id', 'owner', 'product', 'created_at', 'updated_at',
             'content', 'rating', 'is_owner', 'profile_id', 'profile_image',
         ]
+
 
 # Serializer to ensure the review is always associated with the same product
 class ReviewDetailSerializer(ReviewSerializer):
