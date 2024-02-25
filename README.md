@@ -7,7 +7,7 @@ Kit Rate is a website for activity enthusiasts who want to research kit (product
 
 <a href="https://github.com/TR94/kit-rate-pp5-frontend" target="_blank">Link to the Front End repository for KitRate</a>
 
-<a href="..." target="_blank">Link to the Front End deployed site for KitRate</a>
+<a href="https://kitrate-pp5-frontend-625b1b56e5cc.herokuapp.com/" target="_blank">Link to the Front End deployed site for KitRate</a>
 
 <a href="https://github.com/TR94/kit-rate-pp5-backend" target="_blank">Link to the Back End repository for KitRate</a>
 
@@ -29,8 +29,6 @@ This site is designed to be a central hub of product information for mountain bi
 
 ### Initiative: 
 Create a space where users can review products independently providing real-life feedback to inform other people’s buying decisions. Initially the space will be focused on mountain biking but can be expanded in future. 
-
-### User personas: [check if these are needed in the criteria]
 
 ### User Groups: 
 For this website there are two different user groups:
@@ -206,30 +204,52 @@ Categories are created by a super user in the admin panel, these are fixed and c
 
 ![KitRate categories](/static/readme_images/kitrate_categories.png)
 
+The interactions with this table can be seen in the CRUD table below:
+
+![KitRate categories tables](/static/readme_images/categories_crud.png)
+
 ## Favourites
 Favourites are created by a logged in user who wants to save a particular product of interest. Products are marked with how many users have favourited it and users can access their favourited products in the "favourites" page from the navigation bar. The data held for each favourited event is shown below:
 
 ![KitRate favourites](/static/readme_images/kitrate_favourites.png)
+
+The interactions with this table can be seen in the CRUD table below:
+
+![KitRate favourites tables](/static/readme_images/favourites_crud.png)
 
 ## Notifications
 Notifications have not yet been released as a feature in the front end however the database has been set-up to handle them. It is intended that users will receive notifications when a favourited product receives a new review or a product is added to a subscribed cateogry. The data held for each notification is shown below:
 
 ![KitRate notifications](/static/readme_images/kitrate_notifications.png)
 
+The interactions with this table can be seen in the CRUD table below:
+
 ## Products
 Products are created by a logged in user and tie together a lot of the database such as categories, reviews and profiles. The data held for each product is shown below:
 
 ![KitRate products](/static/readme_images/kitrate_products.png)
+
+The interactions with this table can be seen in the CRUD table below:
+
+![KitRate products tables](/static/readme_images/product_crud.png)
 
 ## Reviews
 Reviews are left on products giving the user the chance to leave their thoughts and ratings as well as view other users reviews. The ratings are averaged out and displayed for each proucts. The data held for each review is shown below:
 
 ![KitRate reviews](/static/readme_images/kitrate_reviews.png)
 
+The interactions with this table can be seen in the CRUD table below:
+
+![KitRate reviews tables](/static/readme_images/review_crud.png)
+
 ## Subscriptions
 Users can subscribe to categories of interest with the intention of staying up to date wth the latest products. The feed page will be populated with all the products that are in the subscribed categories for the user. The data held for each subscription is shown below:
 
 ![KitRate subscriptions](/static/readme_images/kitrate_subscriptions.png)
+
+The interactions with this table can be seen in the CRUD table below:
+
+![KitRate subscriptions tables](/static/readme_images/subscriptions_crud.png)
 
 # Security
 Security is taken care of using an env.py file which is included in the gitignore file to ensure it is never committed publicly. Three key pieces of secret information are included in the env.py file:
@@ -270,7 +290,7 @@ All project files are stored within a Git-hub repository. Git-pod is linked to G
 ### Heroku 
 With the pythonic nature of Django, Heroku is used to host the site as back-end application which can be interacted with.
 
-### Cloudinary
+### Cloudinary
 Cloud based storage for images and static files which remains stable to ensure links stay open indefinitely. 
 
 # Testing
@@ -326,16 +346,25 @@ Subscriptions
 * views.py: no errors# Bugs
 
 ## Solved bugs:
+1. The defined categories were not populating the dropdown box as expected whilst creating a product.
+   * This is required to ensure the user selects a valid option.
+   * Solution required "category" field to be added as a "primary key related field" in the product serializer
+  
+2. Same user can subscribe to a category multiple times
+   * Solution required adding a unique_together restraint to the subscriptions model
+  
+3. Each review should have a corresponding rating field and initially the database was designed with these being in separate tables. The data was not linking together correctly.
+   * Removed ratings table entirely and added rating to the review table. This ensured a rating and review are always tied together. 
 
-Unfixed Bugs
-Issues still remaining in the GitHub project:
+## Unfixed Bugs
+Not aware of any unfixed bugs from initial testing and release
 
 # Deployment 
 The project was developed using GitPod and all changes were pushed to GitHub to keep a version history and store the code. The website is deployed using Heroku which provides a link to the website once it has been published. 
 
 It is recommended to deploy the barebones of the project onto Heroku as soon as possible to ensure the connections have been made before the development begins.
 
-### Local deployment is fro the Github repository using the following steps:
+### Local deployment is from the Github repository using the following steps:
 1. Clone the repository from Github using the “Code” button (or if you have an extension to GitPod, click this)
 2. Open your IDE and link the Github repository to import the files
 3. Install the requirements for the site using `pip install -r requirements.txt`
