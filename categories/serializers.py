@@ -17,14 +17,13 @@ class CategorySerializer(serializers.ModelSerializer):
         request = self.context['request']
         return request.user == obj.owner
 
-    # not sure about this at the momment - think the filter set is incorrect, confusing as Im using numerical id's for everything
     def get_subscribe_id(self, obj):
         user = self.context['request'].user
         if user.is_authenticated:
             subscribed = Subscribe.objects.filter(
                 owner=user, category=obj.id
             ).first()
-            return user.username if subscribed else None
+            return subscribed.id if subscribed else None
         return None
 
     class Meta:
