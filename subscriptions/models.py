@@ -21,7 +21,7 @@ class Subscribe(models.Model):
 
     class Meta:
         ordering = ['-created_at']
-        unique_together = ['owner', 'category']
+        # unique_together = ['owner', 'category']
 
     def __str__(self):
         return f'{self.owner} {self.category}'
