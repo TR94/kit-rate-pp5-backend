@@ -29,5 +29,5 @@ class SubscribeDetail(generics.RetrieveDestroyAPIView):
 class MySubscriptions(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
-    def get_queryset(request):
+    def get_queryset(self, request):
         return Subscribe.objects.filter(owner=request.user.id)
