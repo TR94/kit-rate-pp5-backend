@@ -28,6 +28,7 @@ class SubscribeDetail(generics.RetrieveDestroyAPIView):
 
 class MySubscriptions(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
+    serializer_class = SubscribeSerializer
 
     def get_queryset(self):
         return Subscribe.objects.filter(owner=self.request.user)
