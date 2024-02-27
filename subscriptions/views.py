@@ -1,4 +1,5 @@
-from rest_framework import generics, permissions
+from rest_framework import status, generics, permissions
+from rest_framework.response import Response
 from kitrate_api.permissions import IsOwnerOrReadOnly
 
 from .models import Subscribe
@@ -32,6 +33,8 @@ class SubscribeDetail(generics.RetrieveDestroyAPIView):
         
         if subscription:
             subscription.delete()
+
+        return Response(status.HTTP_204_NO_CONTENT)
 
 
 class MySubscriptions(generics.ListAPIView):
