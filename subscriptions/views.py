@@ -26,9 +26,9 @@ class SubscribeDetail(generics.RetrieveDestroyAPIView):
     queryset = Subscribe.objects.all()
 
     def delete(self, request, pk, *args, **kwargs):
-        user = User.objects.get(id=request.user.id)
+        # user = User.objects.get(id=request.user.id)
 
-        subscription = Subscribe.models.filter(category=pk, owner=user).first()
+        subscription = Subscribe.models.filter(category=pk, owner=self.request.user).first()
         
         if subscription:
             subscription.delete()
