@@ -25,7 +25,7 @@ class SubscribeDetail(generics.RetrieveDestroyAPIView):
     serializer_class = SubscribeSerializer
     queryset = Subscribe.objects.all()
 
-    def post(self, request, pk, *args, **kwargs):
+    def delete(self, request, pk, *args, **kwargs):
         user = User.objects.get(id=request.user.id)
 
         subscription = Subscribe.models.filter(category=pk, owner=user).first()
