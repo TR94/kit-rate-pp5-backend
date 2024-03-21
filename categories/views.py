@@ -12,6 +12,7 @@ class CategoryList(generics.ListCreateAPIView):
     # Django generics takes care of GET and PUT methods
 
     serializer_class = CategorySerializer
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = Category.objects.annotate(
         subscriptions_count=Count('subscribed', distinct=True),
         product_count=Count('product', distinct=True),
@@ -42,7 +43,7 @@ class CategoryDetail(generics.RetrieveDestroyAPIView):
     # Django generics takes care of GET and DELETE methods
 
     serializer_class = CategorySerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = Category.objects.annotate(
         subscriptions_count=Count('subscribed', distinct=True),
         product_count=Count('product', distinct=True),

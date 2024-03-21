@@ -11,7 +11,7 @@ class SubscribeList(generics.ListCreateAPIView):
     # Django generics takes care of GET and PUT methods
 
     serializer_class = SubscribeSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = Subscribe.objects.all()
 
     def perform_create(self, serializer):
