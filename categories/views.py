@@ -12,7 +12,6 @@ class CategoryList(generics.ListCreateAPIView):
     # Django generics takes care of GET and PUT methods
 
     serializer_class = CategorySerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Category.objects.annotate(
         subscriptions_count=Count('subscribed', distinct=True),
         product_count=Count('product', distinct=True),
