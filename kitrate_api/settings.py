@@ -63,7 +63,7 @@ REST_AUTH_SERIALIZERS = {
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DEV_DEBUG' in os.environ
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost','8000-tr94-kitratepp5backen-girywucac9b.ws-eu108.gitpod.io', 'kitrate-pp5-backend-47910aa247ff.herokuapp.com']
 
